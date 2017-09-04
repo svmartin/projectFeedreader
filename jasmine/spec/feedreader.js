@@ -35,7 +35,7 @@ $(function () {
                 expect(feed.url).toBeDefined();
                 expect(feed.url).toContain('http');
             });
-        })
+        });
 
         /* Test that loops through each feed
          * in the allFeeds object and ensures it has a name defined
