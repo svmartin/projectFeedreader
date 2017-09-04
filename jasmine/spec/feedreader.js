@@ -51,8 +51,8 @@ $(function () {
 
     /* Test suite named "The menu" */
     describe('The Menu', function () {
-        let body = document.getElementsByTagName('body')[0];
-        let hideMenuLink = document.querySelector('.menu-icon-link');
+        const body = document.getElementsByTagName('body')[0];
+        const hideMenuLink = document.querySelector('.menu-icon-link');
 
         /* Test that ensures the menu element is
          * hidden by default. You'll have to analyze the HTML and
@@ -92,8 +92,8 @@ $(function () {
         });
 
         it('has at least 1 .entry element WITHIN .feed container', function (done) {
-            let feedContainer = document.querySelector('.feed');
-            let allEntries = feedContainer.querySelectorAll('.entry');
+            const feedContainer = document.querySelector('.feed');
+            const allEntries = feedContainer.querySelectorAll('.entry');
 
             expect(allEntries.length).toBeGreaterThan(0);
             done();
