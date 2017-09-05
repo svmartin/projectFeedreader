@@ -60,7 +60,7 @@ $(function () {
          * hiding/showing of the menu element.
          */
         it('should have class "menu-hidden" on pageload', function () {
-            expect(body.classList.contains('menu-hidden')).toEqual(true);
+            expect(body.classList).toContain('menu-hidden');
         });
 
         /* Test that ensures the menu changes
@@ -70,10 +70,10 @@ $(function () {
           */
         it('should change visibility when menu icon is clicked', function () {
             hideMenuLink.click();
-            expect(body.classList.contains('menu-hidden')).toEqual(false);
+            expect(body.classList).not.toContain('menu-hidden');
 
             hideMenuLink.click();
-            expect(body.classList.contains('menu-hidden')).toEqual(true);
+            expect(body.classList).toContain('menu-hidden');
         });
     });
 
@@ -91,12 +91,11 @@ $(function () {
             loadFeed(0, done);
         });
 
-        it('has at least 1 .entry element WITHIN .feed container', function (done) {
+        it('has at least 1 .entry element WITHIN .feed container', function () {
             const feedContainer = document.querySelector('.feed');
             const allEntries = feedContainer.querySelectorAll('.entry');
 
             expect(allEntries.length).toBeGreaterThan(0);
-            done();
         });
     });
 
@@ -114,17 +113,29 @@ $(function () {
          * Let's test to see if entry element content is NOT
          * the same element's content
          */
-        beforeEach(function (done) {
-            currentFeed = document.querySelector('.entry').innerHTML;
-            loadFeed(1, function () {
-                done();
+        // beforeEach(function (done) {
+        //     currentFeed = document.querySelector('.entry').innerHTML;
+        //     loadFeed(1, function () {
+        //         done();
+        //     });
+        // });
+
+        beforeAll(function (done) {
+            // call asyncFunction and pass it an anonymous callback function
+            loadFeed(0, function () {
+                // all code inside this anonymous callback function will only run after
+                // asyncFunction has finished
+                currentFeed = document.querySelector('.feed .entry');
+                console.log('runs after asyncFunction finishes successfully');
+                loadFeed(1, function() {
+                    done();
+                });
             });
         });
 
         it('changes content when a new feed is loaded', function (done) {
             nextFeed = document.querySelector('.entry').innerHTML;
-            expect(currentFeed)
-                .not.toBe(nextFeed);
+            expect(currentFeed).not.toBe(nextFeed);
             done();
         });
     });
