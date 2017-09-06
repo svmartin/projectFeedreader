@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 /* feedreader.js
  *
  * This is the spec file that Jasmine will read and contains
@@ -124,7 +125,7 @@ $(function () {
             loadFeed(0, function () {
                 // all code inside this anonymous callback function will only run after
                 // asyncFunction has finished
-                currentFeed = document.querySelector('.feed .entry');
+                currentFeed = document.querySelector('.feed .entry').innerHTML;
                 console.log('runs after asyncFunction finishes successfully');
                 loadFeed(1, function() {
                     done();
@@ -133,7 +134,7 @@ $(function () {
         });
 
         it('changes content when a new feed is loaded', function () {
-            nextFeed = document.querySelector('.entry').innerHTML;
+            nextFeed = document.querySelector('.feed .entry').innerHTML;
             expect(currentFeed).not.toBe(nextFeed);
         });
     });
