@@ -92,8 +92,7 @@ $(function () {
         });
 
         it('has at least 1 .entry element WITHIN .feed container', function () {
-            const feedContainer = document.querySelector('.feed');
-            const allEntries = feedContainer.querySelectorAll('.entry');
+            const allEntries = document.querySelectorAll('.feed .entry');
 
             expect(allEntries.length).toBeGreaterThan(0);
         });
@@ -133,10 +132,9 @@ $(function () {
             });
         });
 
-        it('changes content when a new feed is loaded', function (done) {
+        it('changes content when a new feed is loaded', function () {
             nextFeed = document.querySelector('.entry').innerHTML;
             expect(currentFeed).not.toBe(nextFeed);
-            done();
         });
     });
 }());
